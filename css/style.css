@@ -1,0 +1,178 @@
+/*
+COLORS:
+
+Light green: #7ed56f
+Medium green: #55c57a
+Dark green: #28b485
+
+*/
+
+/* universal reset of every element on the page to eliminate and pre-configured padding or margin */
+*,
+*::after,
+*::before {
+  /* resets all margins and padding that may be preset on the page for every element */
+  margin: 0;
+  padding: 0;
+  /* indicates that all elements on the page should inherit the box-sizing from their parent,
+  the parent element is body and will cascade to children which is every element on the page. */
+  box-sizing: inherit;
+}
+
+html {
+  /* since the default font value for the root element is generally 16px by calculating 10px / 16px = 62.5% of the full font size */
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #777;
+  padding: 3rem;
+
+  /* prevents padding and borders from being added to the the total height and width of the element */
+  box-sizing: border-box;
+}
+
+.header {
+  /* we set the position to relative so that the .logo-box div containing the logo
+  will be able to set its absolute position relative to the .header */
+  position: relative;
+  height: 95vh;
+  /* layer a linear gradient going to the right and bottom, with one green color going into another 
+     with an alpha channel for opacity, there is also the hero image below the gradient */
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(126, 213, 111, 0.8),
+      rgba(40, 180, 133, 0.8)
+    ),
+    url(../img/hero.jpg);
+  background-size: cover;
+  /* makes sure the image doesn't get cropped from the top */
+  background-position: top;
+  /* creates a clip path that describes a polygon with x,y coordinates
+   for each corner of the polygon: top-left, top-right, bottom-right, bottom-left */
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+}
+
+.header__logo-box {
+  position: absolute;
+  top: 4rem;
+  left: 4rem;
+}
+
+.header__logo {
+  height: 3.5rem;
+}
+
+/* the .logo will move when we hover over the .logo-box */
+.header__logo-box:hover .header__logo {
+  animation: moveInRight 2s ease-in-out;
+}
+
+.header__text-box {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  /* In order to center align to the header, we need to translate
+  x and y coordinates to move to 50% within the box, we shift it
+  50% width of box and 50% height of box */
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.heading-primary {
+  color: #fff;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
+.heading-primary--main {
+  display: block;
+  font-size: 6rem;
+  font-weight: 400;
+  letter-spacing: 3.5rem;
+  animation: moveInLeft 4s ease-in-out;
+
+  /* 
+  animation-delay: 3s; // delays animation start for 3s
+  animation-iteration-count: 3;  // repeats animation 3 times
+  */
+}
+
+.heading-primary--sub {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 1.74rem;
+  animation: moveInRight 4s ease-in-out;
+}
+
+@keyframes moveInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-10rem);
+  }
+  80% {
+    transform: translateX(3rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+@keyframes moveInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(10rem);
+  }
+  80% {
+    transform: translateX(-3rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+.btn:link,
+.btn:visited {
+  text-transform: uppercase;
+  text-decoration: none;
+  /* in order to be able to add margin and padding to what is actually
+  an <a> tag we have to make it an inline-block which can have padding 
+  and margin added to it */
+  display: inline-block;
+  padding: 1.5rem 4rem;
+  border-radius: 10rem;
+  left: 50%;
+  transition: all 0.2s;
+  font-size: 1.6rem;
+}
+
+/* Moves the button up by 3px up when we hover over the element*/
+.btn:hover {
+  transform: translateY(-0.03rem);
+  /* gives a soft light shadow underneath */
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+}
+
+/* :active happens when we click the element
+  ths transform moves the button 1px up
+  Note: this is in relation to the :link, :visited
+  state and not the :hover state */
+.btn:active {
+  transform: translateY(-0.01rem);
+  /* gives a soft and smaller light shadow underneath when "pressed" */
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+}
+
+.btn--white {
+  background-color: white;
+  color: #777;
+}
